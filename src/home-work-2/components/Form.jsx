@@ -39,24 +39,26 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={style}>
-      <input
-        onChange={onChangeInput}
-        style={style__input}
-        name="email"
-        type="text"
-        placeholder="E-Mail"
-      />
-      <input
-        onChange={onChangeInput}
-        style={style__input}
-        name="password"
-        type="password"
-        placeholder="Пароль"
-      />
-      <button style={style__button} type="submit">
-        Войти
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} style={style}>
+        <input
+          onChange={onChangeInput}
+          style={style__input}
+          name="email"
+          type="text"
+          placeholder="E-Mail"
+        />
+        <input
+          onChange={onChangeInput}
+          style={style__input}
+          name="password"
+          type="password"
+          placeholder="Пароль"
+        />
+        <button style={style__button} type="submit">
+          Войти
+        </button>
+      </form>
+    </div>
   );
 }
