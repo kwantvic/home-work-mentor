@@ -18,7 +18,7 @@ const setData = (data) => {
 //           border: '12px solid rgb(225,225,225)',
 //           borderRadius: 20,
 //           margin: 50,
-//           paddingLeft: 50,
+//           paddingLeft: 51,
 //         }}>
 //         <p style={{ fontSize: 50 }}>
 //           Привет, <b>{this.props.name}</b>!
@@ -36,7 +36,7 @@ export default function Profile(props) {
         border: '12px solid rgb(225,225,225)',
         borderRadius: 20,
         margin: 50,
-        paddingLeft: 50,
+        paddingLeft: 51,
       }}>
       <p style={{ fontSize: 50 }}>
         Привет, <b>{props.name}</b>!
