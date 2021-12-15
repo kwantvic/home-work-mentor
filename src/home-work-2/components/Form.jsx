@@ -26,11 +26,20 @@ export default function Form() {
     password = '';
 
   function onChangeInput(e) {
-    e.target.name === 'email' ? (email = e.target.value) : (password = e.target.value);
+    if (e.target.name === 'email') {
+      email = e.target.value;
+    } else {
+      password = e.target.value;
+    }
   }
 
   function handleSubmit(e) {
-    !email || !password ? alert('❗️Заполните поля формы!') : console.log({ email, password });
+    if (!email.trim() || !password.trim()) {
+      alert('❗️Заполните поля формы!');
+    } else {
+      console.log({ email, password });
+    }
+
     e.preventDefault();
     e.target[0].value = '';
     e.target[1].value = '';
