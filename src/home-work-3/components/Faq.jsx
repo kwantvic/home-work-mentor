@@ -48,7 +48,7 @@ export default function Faq() {
               id={obj.id}
               key={`${obj.id}_${index}`}>
               <input onClick={onClickItem} id={`tab-${obj.id}`} type="checkbox" name="tabs" />
-              <label for={`tab-${obj.id}`}>{obj.title}</label>
+              <label htmlFor={`tab-${obj.id}`}>{obj.title}</label>
               <div className="tab-content">
                 <p>{obj.description}</p>
               </div>
