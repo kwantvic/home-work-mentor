@@ -18,23 +18,22 @@
     let tasks = [];
 
     function clearLi() {
-      let input = document.getElementsByClassName('inputNewTask');
-      let ul = document.getElementsByClassName('tasks');
-      let ulTasks = ul[0];
+      let input = document.querySelector('.inputNewTask');
+      let ulTasks = document.querySelector('.tasks');
       while (ulTasks.firstChild) {
         ulTasks.removeChild(ulTasks.firstChild);
       }
-      input[0].value = '';
+      input.value = '';
     }
 
     function render(arr) {
       clearLi();
-      let addTasks = arr.map((task, index) => {
-        let ulTasks = document.getElementsByClassName('tasks');
+      arr.forEach((task, index) => {
+        let ulTasks = document.querySelector('.tasks');
         let liTask = document.createElement('li');
         liTask.innerHTML =
           task + "<button type='button' onclick='handleClickRemove(" + index + ")'>X</button>";
-        return ulTasks[0].appendChild(liTask);
+        ulTasks.appendChild(liTask);
       });
     }
 
@@ -47,8 +46,8 @@
       render(tasks);
     }
     function handleClickAdd() {
-      let input = document.getElementsByClassName('inputNewTask');
-      let newTask = input[0].value;
+      let input = document.querySelector('.inputNewTask');
+      let newTask = input.value;
       if (!newTask.trim()) {
         alert('❗️Введите задачу!');
       } else {
