@@ -29,12 +29,11 @@ const tabs = [
 ];
 
 export default function Faq() {
-  const [activeId, setActiveId] = React.useState(null);
-  const [visibleDescription, setVisibleDescription] = React.useState(false);
+  const [activeId, setActiveId] = React.useState(1);
 
   function onClickItem(e) {
     setActiveId(Number(e.target.id.slice(4)));
-    setVisibleDescription(!visibleDescription);
+    console.log(e, '🩸myTest🧩');
   }
 
   return (
@@ -42,11 +41,8 @@ export default function Faq() {
       <div className="app-container">
         <h1 className="app-title">FAQ</h1>
         <div className="app-tabs">
-          {tabs.map((obj, index) => (
-            <div
-              className={activeId === obj.id && visibleDescription ? 'tab active' : 'tab'}
-              id={obj.id}
-              key={`${obj.id}_${index}`}>
+          {tabs.map((obj) => (
+            <div className={activeId === obj.id ? 'tab active' : 'tab'} id={obj.id} key={obj.id}>
               <input onClick={onClickItem} id={`tab-${obj.id}`} type="checkbox" name="tabs" />
               <label htmlFor={`tab-${obj.id}`}>{obj.title}</label>
               <div className="tab-content">
