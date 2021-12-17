@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏠home-work-4🅰️</title>
+  </head>
+
+  <body onload="render(tasks)">
+    <div>
+      <ul class="tasks"></ul>
+      <input type="text" class="inputNewTask" placeholder="Текст задачи..." />
+      <button class="button" onclick="handleClickAdd()">Добавить</button>
+    </div>
+  </body>
+  <script type="text/javascript">
+    let tasks = [];
+
+    function clearLi() {
+      let input = document.getElementsByClassName('inputNewTask');
+      let ul = document.getElementsByClassName('tasks');
+      let ulTasks = ul[0];
+      while (ulTasks.firstChild) {
+        ulTasks.removeChild(ulTasks.firstChild);
+      }
+      input[0].value = '';
+    }
+
+    function render(arr) {
+      clearLi();
+      let addTasks = arr.map((task, index) => {
+        let ulTasks = document.getElementsByClassName('tasks');
+        let liTask = document.createElement('li');
+        liTask.innerHTML =
+          task + "<button type='button' onclick='handleClickRemove(" + index + ")'>X</button>";
+        return ulTasks[0].appendChild(liTask);
+      });
+    }
+
+    function handleClickRemove(index) {
+      let newTasks = tasks.filter((task, indexTask) => {
+        return indexTask !== index;
+      });
+      tasks = newTasks;
+
+      render(tasks);
+    }
+    function handleClickAdd() {
+      let input = document.getElementsByClassName('inputNewTask');
+      let newTask = input[0].value;
+      if (!newTask.trim()) {
+        alert('❗️Введите задачу!');
+      } else {
+        tasks.push(newTask);
+        newTask = '';
+      }
+
+      render(tasks);
+    }
+  </script>
+</html>
