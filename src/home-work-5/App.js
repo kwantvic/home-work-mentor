@@ -76,10 +76,7 @@ function App() {
     setStart(false);
     let phrase = [];
     phrase.push(shuffle(adjectivesArr, 2).concat(shuffle(nounsArr, 1)));
-    // console.log(phrase, '🩸myTest🧩phrase');
-    // console.log(phrase.join('-'), '🩸myTest🧩[]');
-    setArrPhrases([...arrPhrases, phrase]);
-    // console.log(arrPhrases, '🩸myTest🧩state');
+    setArrPhrases([...arrPhrases, phrase.join(' ')]);
   }
 
   return (
