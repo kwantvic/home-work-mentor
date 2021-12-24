@@ -5,31 +5,20 @@ import './App.scss';
 import Reviews from './components/Reviews/index';
 import Feedback from './components/Feedback/index';
 
-// {
-//   fullName: "Вася Пупкин",
-//   email: "vasya@mail.ru",
-//   createdAt: "Thu Oct 14 2021 13:41:01",
-//   text: "....."
-// }
+const localStorageComments = JSON.parse(localStorage.getItem('comments'))
+  ? JSON.parse(localStorage.getItem('comments'))
+  : [];
 
 export default function App() {
-  const [comments, setComments] = React.useState([
-    {
-      fullName: 'Вася Пупкин',
-      email: 'vasya@mail.ru',
-      createdAt: '12.12.2021 23:54',
-      text: 'что-то ничего не работает(',
-    },
-  ]);
+  const [comments, setComments] = React.useState(localStorageComments);
 
   React.useEffect(() => {
     localStorage.setItem('comments', JSON.stringify(comments));
   }, [comments]);
 
-  // React.useEffect(() => {
-  //   let localStorageComments = localStorage.getItem('comments');
-  //   setComments(localStorageComments);
-  // }, []);
+  React.useEffect(() => {
+    setComments(localStorageComments);
+  }, []);
 
   function formaDate(date) {
     return date
@@ -55,13 +44,19 @@ export default function App() {
       user.email = email;
       user.createdAt = createdAt;
       user.text = text;
+      user.avatar = `http://source.unsplash.com/50x50/?people&${comments.length}`;
       setComments([...comments, user]);
     }
   }
 
+  function removeComment(text) {
+    let newCommets = comments.filter((obj) => obj.text !== text);
+    setComments(newCommets);
+  }
+
   return (
     <div className="app">
-      <Reviews comments={comments} />
+      <Reviews comments={comments} removeComment={removeComment} />
       <Feedback sendComments={sendComments} />
     </div>
   );

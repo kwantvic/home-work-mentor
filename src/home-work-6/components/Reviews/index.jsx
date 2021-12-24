@@ -7,8 +7,9 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
 import styles from './Reviews.module.scss';
+import { CloseButton } from 'react-bootstrap';
 
-export default function Reviews({ comments }) {
+export default function Reviews({ comments, removeComment }) {
   return (
     <List
       sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', marginBottom: 2 }}
@@ -18,7 +19,7 @@ export default function Reviews({ comments }) {
       {comments.map((obj, index) => (
         <ListItem key={index} alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src={`http://source.unsplash.com/50x50/?people&${index}`} />
+            <Avatar alt="Remy Sharp" src={obj.avatar} />
           </ListItemAvatar>
           <ListItemText
             primary={obj.fullName}
@@ -33,6 +34,7 @@ export default function Reviews({ comments }) {
                 </Typography>
                 <br />
                 {obj.createdAt}
+                <CloseButton className={styles.close} onClick={() => removeComment(obj.text)} />
               </React.Fragment>
             }
           />
