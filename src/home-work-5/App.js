@@ -77,6 +77,7 @@ function App() {
     let phrase = [];
     phrase.push(shuffle(adjectivesArr, 2).concat(shuffle(nounsArr, 1)));
     setArrPhrases([...arrPhrases, phrase.join(' ')]);
+    console.log(arrPhrases, '🩸myTest🧩');
   }
 
   return (

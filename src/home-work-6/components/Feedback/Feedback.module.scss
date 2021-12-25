@@ -1,0 +1,46 @@
+.listItem {
+  display: contents;
+}
+
+.block {
+  border: 2px solid rgb(218, 223, 227);
+  border-radius: 5px;
+}
+
+.parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input {
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+.h4 {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.text {
+  height: 100px;
+}
+
+.buttonStack {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 90%;
+  margin: auto;
+  margin-top: 2px;
+  height: 30px;
+  border-radius: 2px;
+  margin-bottom: -10px;
+  font-weight: normal;
+}
