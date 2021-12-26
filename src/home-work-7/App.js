@@ -10,21 +10,13 @@ import About from './Pages/About';
 import NotFound from './Pages/NotFound';
 
 export default function App() {
-  const { pathname } = window.location;
-
-  let namePath = 'post';
-
-  function getPathId(name) {
-    return pathname.replace(`/${name}/`, '');
-  }
-
   return (
     <div className="App">
       <Header />
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/" element={<Article id={getPathId(namePath)} />} />
-        <Route path="/about" exact element={About} />
+        <Route path="/post/:id" element={<Article />} exact />
+        <Route path="/about" exact element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <br />
