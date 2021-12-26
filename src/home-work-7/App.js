@@ -7,6 +7,7 @@ import Footer from './components/Footer/index';
 import Home from './Pages/Home';
 import About from './Pages/About';
 // import Route from './components/Route';
+import NotFound from './Pages/NotFound';
 
 export default function App() {
   const { pathname } = window.location;
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/" element={<Article id={getPathId(namePath)} />} />
         <Route path="/about" exact element={About} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <br />
       <Footer />
