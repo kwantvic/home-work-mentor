@@ -2,11 +2,26 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import './styles.css';
 
+const schema = yup.object().shape({
+  firstName: yup.string().min(2, 'Слишком короткое имя!'),
+  lastName: yup.string().min(3, 'Слишком короткая фамилия!'),
+  email: yup.string().email('Неверная почта!').required('Укажите почту!'),
+  // password: yup.string().min(6),
+  password: yup.string().when('email', {
+    is: (value) => value.includes('@'),
+    then: yup.string().min(6, 'Пароль должен состоять минимум из 6 символов!'),
+  }),
+});
+
 function App() {
-  const { handleSubmit, register, formState, reset } = useForm();
+  const { handleSubmit, register, formState, reset } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = (values) => {
     console.log('ФОРМА!', values);
@@ -33,9 +48,7 @@ function App() {
           <TextField
             name="firstName"
             label="Имя"
-            {...register('firstName', {
-              required: 'Это обязательное поле!',
-            })}
+            {...register('firstName')}
             helperText={formState.errors.firstName && formState.errors.firstName.message}
             error={!!formState.errors.firstName}
             fullWidth
@@ -43,9 +56,7 @@ function App() {
           <TextField
             name="lastName"
             label="Фамилия"
-            {...register('lastName', {
-              required: 'Это обязательное поле!',
-            })}
+            {...register('lastName')}
             helperText={formState.errors.lastName && formState.errors.lastName.message}
             error={!!formState.errors.lastName}
             fullWidth
@@ -53,13 +64,7 @@ function App() {
         </div>
         <div className="row">
           <TextField
-            {...register('email', {
-              required: 'Это обязательное поле!',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9._%+-]+\.[A-Z]{2,}$/i,
-                message: 'Это неверная почта!',
-              },
-            })}
+            {...register('email')}
             helperText={formState.errors.email && formState.errors.email.message}
             error={!!formState.errors.email}
             name="email"
@@ -68,9 +73,7 @@ function App() {
             fullWidth
           />
           <TextField
-            {...register('password', {
-              required: 'Это обязательное поле!',
-            })}
+            {...register('password')}
             helperText={formState.errors.password && formState.errors.password.message}
             error={!!formState.errors.password}
             name="password"
