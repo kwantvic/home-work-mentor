@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Article({ id }) {
   return (
@@ -9,9 +10,9 @@ export default function Article({ id }) {
         aliquam sit id veritatis, doloribus ducimus quas, dignissimos non minima quia amet possimus?
         Impedit nemo ducimus fuga rem!
       </p>
-      <a href="/">
+      <Link href="/">
         <button>Назад</button>
-      </a>
+      </Link>
     </div>
   );
 }
