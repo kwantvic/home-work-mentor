@@ -8,13 +8,27 @@ import './styles.css';
 function App() {
   const { handleSubmit, register, formState, reset } = useForm();
 
-  const onSubmit = (values) => console.log('ФОРМА!', values);
+  const onSubmit = (values) => {
+    console.log('ФОРМА!', values);
+    onReset();
+    return null;
+  };
 
-  console.log(formState.errors);
+  function onReset() {
+    return reset({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      about: '',
+    });
+  }
+
+  console.log('❌ ', formState.errors);
 
   return (
     <div className="App">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="row">
           <TextField
             name="firstName"
@@ -66,14 +80,14 @@ function App() {
           />
         </div>
         <div className="row">
-          <TextField name="about" label="Обо мне" fullWidth />
+          <TextField {...register('about')} name="about" label="Обо мне" fullWidth />
         </div>
         <br />
         <div className="row">
-          <Button onClick={handleSubmit(onSubmit)} variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary">
             Зарегистрироваться
           </Button>
-          <Button variant="contained" color="secondary">
+          <Button onClick={onReset} variant="contained" color="secondary">
             Очистить
           </Button>
         </div>
