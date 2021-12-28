@@ -4,12 +4,16 @@ export default function App() {
   const [users, setUsers] = React.useState([]);
 
   async function getUsers() {
-    let resp = await fetch('https://61cae79f194ffe0017788a25.mockapi.io/user');
-    if (resp.ok) {
-      let result = await resp.json();
-      setUsers(result);
-    } else {
-      throw new Error(resp.statusText);
+    try {
+      let resp = await fetch('https://61cae79f194ffe0017788a25.mockapi.io/user1');
+      if (resp.ok) {
+        let result = await resp.json();
+        setUsers(result);
+      } else {
+        throw new Error(resp.statusText);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
