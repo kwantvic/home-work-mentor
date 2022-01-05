@@ -25,6 +25,7 @@ export default function App() {
   const [valueSearch, setValueSearch] = React.useState('');
   const [userInfo, setUserInfo] = React.useState(emptyUser);
   const timerRef = React.useRef();
+  const isMountedRef = React.useRef(false);
 
   let locationSearch = window.location.search.slice(7);
 
@@ -33,20 +34,20 @@ export default function App() {
   }
 
   async function searchUser(value) {
-    setLoadingSearch(false);
     setLoadingSearch(true);
     try {
       const { data } = await axios.get(`https://api.github.com/users/${value}`);
-      window.history.pushState(null, null, `/?login=${valueSearch}`);
+      window.history.pushState(null, null, `/?login=${value}`);
       setUserInfo(data);
+      setVisibleUser(true);
     } catch (err) {
+      window.history.pushState(null, null, `/`);
       setUserInfo(emptyUser);
-      window.location.href = window.location.origin;
+      setValueSearch('');
       alert(`❌ Юзер "${value}" не найден❗️`);
+      setVisibleUser(false);
     }
-    setValueSearch('');
     setLoadingSearch(false);
-    setVisibleUser(true);
   }
 
   function handleClickSearch(event) {
@@ -55,24 +56,29 @@ export default function App() {
   }
 
   // React.useEffect(() => {
-  //   if (locationSearch.trim() && visibleUser) {
+  //   if (locationSearch.trim()) {
   //     setValueSearch(locationSearch);
   //     searchUser(locationSearch);
-  //   } else {
-  //     return null;
   //   }
   // }, [locationSearch]);
 
   React.useEffect(() => {
-    if (valueSearch.trim()) {
+    if (valueSearch.trim() && isMountedRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = setTimeout(() => {
         searchUser(valueSearch);
       }, 1000);
-    } else {
-      window.history.replaceState(null, null, `/?login=`);
+    }
+    isMountedRef.current = true;
+  }, [valueSearch]);
+
+  React.useEffect(() => {
+    if (!valueSearch) {
+      window.history.replaceState(null, null, `/`);
     }
   }, [valueSearch]);
+
+  console.log('🩸myTest🧩RELOAD');
 
   return (
     <div id="app">
