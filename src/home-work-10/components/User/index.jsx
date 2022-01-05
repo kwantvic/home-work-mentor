@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './User.module.scss';
 
-export default function User({ userInfo, visibleUser }) {
+export default function User({ userInfo }) {
   return (
-    <div className={!visibleUser ? `${styles.hidden} app-user` : 'app-user'}>
+    <div className="app-user">
       <div className="app-user_info">
         <div className="app-user_image">
           <img src={userInfo.avatar_url} alt={'avatar'} />

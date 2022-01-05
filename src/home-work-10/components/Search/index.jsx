@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function Search({ valueSearch, handleInputSearch, handleSearch, loadingSearch }) {
+export default function Search({
+  valueSearch,
+  handleInputSearch,
+  handleClickSearch,
+  loadingSearch,
+}) {
   return (
     <form className="app-form" style={{ marginTop: '5px' }}>
       <input
@@ -12,7 +17,8 @@ export default function Search({ valueSearch, handleInputSearch, handleSearch, l
       />
       <button
         disabled={loadingSearch ? 'disabled' : false}
-        onClick={(event) => handleSearch(event)}
+        onClick={handleClickSearch}
+        type="submit"
         className="app-form_btn">
         Найти
       </button>
